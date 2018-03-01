@@ -11,7 +11,7 @@ describe "Makes API" do
 
     expect(response).to be_success
 
-    expect(json['makes'].length).to eq(10)
+    expect(json.length).to eq(10)
   end
 
   it "sends a list of all vehicle makes that includes attributes" do
@@ -25,8 +25,8 @@ describe "Makes API" do
 
     expect(response).to be_success
 
-    expect(json['makes'][0].name).to eq(first_car_name)
-    expect(json['makes'][9].name).to eq(last_car_name)
+    expect(json[0]['name']).to eq(first_car_name)
+    expect(json[9]['name']).to eq(last_car_name)
   end
 
   # xit "can create a new vehicle make" do
