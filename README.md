@@ -14,9 +14,9 @@ API Documentation:
 
 ### Makes
 
-| Resources        | Detail |
-| ------------- |-------------:|
-| `GET /api/v1/makes` | List all vehicle Makes. |
+| Resources | Detail |
+| :-------- |:-------|
+| `GET /api/v1/makes` | Index all makes |
 
 
 ## License
