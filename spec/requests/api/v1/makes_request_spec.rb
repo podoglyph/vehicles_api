@@ -3,19 +3,21 @@ require 'rails_helper'
 describe "Makes API" do
 
   it "can return a list of all vehicle makes" do
+    car = create(:make)
+
+    expect(car).to_not be_empty
+  end
+
+  xit "can create a new vehicle make" do
 
   end
 
-  it "can create a new vehicle make" do
+  xit "can update an existing vehicle make" do
 
   end
 
-  it "can update an existing vehicle make" do
+  xit "can delete an existing vehicle make" do
 
   end
 
-  it "can delete an existing vehicle make" do
-
-  end
-  
 end
