@@ -10,6 +10,15 @@ This app is built with:
 * `Ruby 2.4.1`
 * `PostgreSQL 10.2`
 
+API Documentation:
+
+### Makes
+
+| Resources | Detail |
+| :-------- |:-------|
+| `GET /api/v1/makes` | Index all makes |
+
+
 ## License
 
 This project is licensed under the MIT License.
