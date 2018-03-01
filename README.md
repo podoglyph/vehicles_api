@@ -1,24 +1,13 @@
-# README
+# Vehicles API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails JSON API for Vehicles, Makes, Models, and Options.
 
-Things you may want to cover:
+This app is built with:
 
-* Ruby version
+* `Rails 5.1.5`
+* `Ruby 2.4.1`
+* `PostgreSQL 10.2`
 
-* System dependencies
+## License
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project is licensed under the MIT License.
