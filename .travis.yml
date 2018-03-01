@@ -3,3 +3,6 @@ rvm:
  - 2.4.1
 services:
  - postgresql
+script:
+- bin/rake db:setup
+- bin/rake db:seed
