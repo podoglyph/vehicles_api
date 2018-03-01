@@ -1,24 +1,15 @@
-# README
+# Vehicles API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+![travis_status](https://travis-ci.org/podoglyph/vehicles_api.svg?branch=master)
 
-Things you may want to cover:
+A Rails JSON API for Vehicles, Makes, Models, and Options.
 
-* Ruby version
+This app is built with:
 
-* System dependencies
+* `Rails 5.1.5`
+* `Ruby 2.4.1`
+* `PostgreSQL 10.2`
 
-* Configuration
+## License
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This project is licensed under the MIT License.
