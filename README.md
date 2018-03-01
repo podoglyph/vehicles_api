@@ -1,5 +1,7 @@
 # Vehicles API
 
+![travis_status](https://travis-ci.org/podoglyph/vehicles_api.svg?branch=master)
+
 A Rails JSON API for Vehicles, Makes, Models, and Options.
 
 This app is built with:
