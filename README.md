@@ -16,7 +16,8 @@ This app is built with:
 
 | Resources | Detail |
 | :-------- |:-------|
-| `GET /api/v1/makes` | Index all makes |
+| GET `/api/v1/makes` | Index all makes |
+| GET `/api/v1/makes/:id` | Show single make |
 
 
 ## License
