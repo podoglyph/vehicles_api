@@ -51,10 +51,20 @@ describe "Makes API" do
     expect(make.name).to eq(make_params[:name])
   end
 
-  # xit "can update an existing vehicle make" do
-  #
-  # end
-  #
+  it "can update an existing vehicle make" do
+    make = create(:make)
+    id = make.id
+    make_name = make.name
+
+    put "/api/v1/makes/#{id}", params: {make: {id: id, name: "Jelly Bean"}}
+
+    new_make = Make.find(id)
+
+    assert_response :success
+    expect(response).to be_success
+    expect(new_make.name).to eq("Jelly Bean")
+  end
+
   # xit "can delete an existing vehicle make" do
   #
   # end
