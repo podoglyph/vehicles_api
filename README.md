@@ -23,6 +23,15 @@ This app is built with:
 | DELETE `/api/v1/makes/:id` | Delete existing make |
 
 
+### Models
+
+| Resources | Detail |
+| :-------- |:-------|
+| GET `/api/v1/makes/:id/models` | Index all models for a make |
+| POST `/api/v1/makes/:id/models/?model[name]=name` | Create new model for a make |
+| PUT `/api/v1/makes/:id/models/:id` | Update existing model |
+| DELETE `/api/v1/makes/:id/models/:id` | Delete existing model |
+
 ## License
 
 This project is licensed under the MIT License.
