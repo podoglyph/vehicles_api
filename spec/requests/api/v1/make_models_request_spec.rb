@@ -37,13 +37,38 @@ describe "Make Models API" do
     expect(model.name).to eq(model_params[:name])
   end
 
-  xit "can update a model for a given make" do
+  it "can update a model for a given make" do
+    make = create(:make)
+    make_id = make.id
+    model = make.models.create(name: "Pinto")
+    model_id = model.id
+    model_name = model.name
 
+    put "/api/v1/makes/#{make_id}/models/#{model_id}", params: {model: {id: model_id, name: "Jelly Bean"}}
+
+    new_model = Model.find(model_id)
+
+    assert_response :success
+    expect(response).to be_success
+    expect(new_model.name).to eq("Jelly Bean")
   end
 
-  xit "can delete a model from a given make" do
+  it "can delete a model from a given make" do
+    make = create(:make)
+    make_id = make.id
+    model_one = make.models.create(name: "Pinto Bean")
+    model_two = make.models.create(name: "Jelly Bean")
 
+    expect(Model.count).to eq(2)
+
+    model_one_id = model_one.id
+    model_two_id = model_two.id
+
+    delete "/api/v1/makes/#{make_id}/models/#{model_one_id}"
+
+    assert_response :success
+    expect(response).to be_success
+    expect(Model.count).to eq(1)
   end
-
 
 end

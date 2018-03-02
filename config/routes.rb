@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       namespace :makes do
         get "/:id/models", to: "models#index"
         post "/:id/models", to: "models#create"
+        put "/:id/models/:id", to: "models#update"
+        delete "/:id/models/:id", to: "models#destroy"
       end
 
     end
