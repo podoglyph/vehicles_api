@@ -5,7 +5,8 @@ Rails.application.routes.draw do
       resources :makes, except: [:new]
 
       namespace :makes do
-        get '/:id/models', to: "models#index"
+        get "/:id/models", to: "models#index"
+        post "/:id/models", to: "models#create"
       end
 
     end

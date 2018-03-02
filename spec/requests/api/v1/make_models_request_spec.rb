@@ -14,10 +14,27 @@ describe "Make Models API" do
 
     expect(response).to be_success
     expect(json.length).to eq(2)
+
+    expect(json.first["name"]).to eq("Helen")
+    expect(json.first["make_id"]).to eq(id)
+
+    expect(json.last["name"]).to eq("Achilles")
+    expect(json.last["make_id"]).to eq(id)
+
   end
 
-  xit "can create a model for a given make" do
+  it "can create a model for a given make" do
+    make = create(:make)
+    id = make.id
+    model_params = {name: "Zeus"}
 
+    post "/api/v1/makes/#{id}/models", params: {model: model_params}
+
+    model = make.models.last
+
+    assert_response :success
+    expect(response).to be_success
+    expect(model.name).to eq(model_params[:name])
   end
 
   xit "can update a model for a given make" do
