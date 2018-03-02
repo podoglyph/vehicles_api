@@ -1,12 +1,12 @@
 class Api::V1::MakesController < ApplicationController
-
+  before_action :set_make, only: [:show, :update, :destroy]
 
   def index
     render json: Make.all
   end
 
   def show
-    render json: Make.find(params[:id])
+    render json: @make
   end
 
   def create
@@ -22,21 +22,19 @@ class Api::V1::MakesController < ApplicationController
 
 
   def update
-    make = Make.find(params[:id])
-    if make.update(make_params)
+    if @make.update(make_params)
       head :no_content
     else
-      render json: make.errors, status: 400
+      render json: @make.errors, status: 400
     end
   end
 
   def destroy
-    make = Make.find(params[:id])
 
-    if make.destroy
+    if @make.destroy
       head :no_content
     else
-      render json: make.errors, status: 400
+      render json: @make.errors, status: 400
     end
 
   end
@@ -46,6 +44,10 @@ class Api::V1::MakesController < ApplicationController
 
     def make_params
       params.require(:make).permit(:id, :name)
+    end
+
+    def set_make
+      @make = Make.find(params[:id])
     end
 
 end
