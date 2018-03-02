@@ -9,7 +9,7 @@ describe "Makes API" do
 
     json = JSON.parse(response.body)
     expect(response).to be_success
-    expect(json["data"].length).to eq(10)
+    expect(json.length).to eq(10)
   end
 
   it "sends a list of all vehicle makes that includes attributes" do
@@ -22,8 +22,8 @@ describe "Makes API" do
     json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json["data"].first.dig("attributes", "name")).to eq(first_make_name)
-    expect(json["data"].last.dig("attributes", "name")).to eq(last_make_name)
+    expect(json.first["name"]).to eq(first_make_name)
+    expect(json.last["name"]).to eq(last_make_name)
   end
 
   it "can return a single vehicle make" do
@@ -35,7 +35,7 @@ describe "Makes API" do
     json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json["data"]["id"]).to eq(id.to_s)
+    expect(json["id"]).to eq(id)
   end
 
   it "can create a new make" do
