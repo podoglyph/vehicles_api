@@ -34,7 +34,6 @@ describe "Makes API" do
     get "/api/v1/makes/#{id}"
 
     json = JSON.parse(response.body)
-
     expect(response).to be_success
     expect(json["id"]).to eq(id)
   end
