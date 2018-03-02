@@ -65,8 +65,18 @@ describe "Makes API" do
     expect(new_make.name).to eq("Jelly Bean")
   end
 
-  # xit "can delete an existing vehicle make" do
-  #
-  # end
+  it "can delete an existing vehicle make" do
+    makes = create_list(:make, 5)
+
+    expect(Make.count).to eq(5)
+
+    make_one_id = makes[0].id
+
+    delete "/api/v1/makes/#{make_one_id}"
+
+    assert_response :success
+    expect(response).to be_success
+    expect(Make.count).to eq(4)
+  end
 
 end

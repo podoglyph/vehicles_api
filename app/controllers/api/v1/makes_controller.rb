@@ -30,6 +30,17 @@ class Api::V1::MakesController < ApplicationController
     end
   end
 
+  def destroy
+    make = Make.find(params[:id])
+
+    if make.destroy
+      head :no_content
+    else
+      render json: make.errors, status: 400
+    end
+
+  end
+
 
   private
 
