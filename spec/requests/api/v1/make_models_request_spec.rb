@@ -5,13 +5,13 @@ describe "Make Models API" do
   it "sends a list of all models with a given make" do
     make = create(:make)
     id = make.id
-    make.models.create(name: "Hellen")
+    make.models.create(name: "Helen")
     make.models.create(name: "Achilles")
 
     get "/api/v1/makes/#{id}/models"
 
     json = JSON.parse(response.body)
-    
+
     expect(response).to be_success
     expect(json.length).to eq(2)
   end
