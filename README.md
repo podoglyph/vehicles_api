@@ -10,13 +10,14 @@ This app is built with:
 * `Ruby 2.4.1`
 * `PostgreSQL 10.2`
 
-API Documentation:
+## API Documentation:
 
 ### Makes
 
 | Resources | Detail |
 | :-------- |:-------|
-| `GET /api/v1/makes` | Index all makes |
+| GET `/api/v1/makes` | Index all makes |
+| GET `/api/v1/makes/:id` | Show single make |
 
 
 ## License
