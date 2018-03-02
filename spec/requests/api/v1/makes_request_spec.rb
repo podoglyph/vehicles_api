@@ -8,23 +8,22 @@ describe "Makes API" do
     get "/api/v1/makes"
 
     json = JSON.parse(response.body)
-
     expect(response).to be_success
     expect(json.length).to eq(10)
   end
 
   it "sends a list of all vehicle makes that includes attributes" do
     makes = create_list(:make, 10)
-    first_make_name = makes[0].name
-    last_make_name = makes[9].name
+    first_make_name = makes.first.name
+    last_make_name = makes.last.name
 
     get "/api/v1/makes"
 
     json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(json[0]['name']).to eq(first_make_name)
-    expect(json[9]['name']).to eq(last_make_name)
+    expect(json.first["name"]).to eq(first_make_name)
+    expect(json.last["name"]).to eq(last_make_name)
   end
 
   it "can return a single vehicle make" do

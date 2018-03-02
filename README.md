@@ -18,6 +18,9 @@ This app is built with:
 | :-------- |:-------|
 | GET `/api/v1/makes` | Index all makes |
 | GET `/api/v1/makes/:id` | Show single make |
+| POST `/api/v1/makes?make[name]=name` | Create new make |
+| PUT `/api/v1/makes/:id` | Update existing make |
+| DELETE `/api/v1/makes/:id` | Delete existing make |
 
 
 ## License
