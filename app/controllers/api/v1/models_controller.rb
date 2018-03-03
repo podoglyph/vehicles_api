@@ -1,12 +1,12 @@
-class Api::V1::Makes::ModelsController < ApplicationController
+class Api::V1::ModelsController < ApplicationController
   before_action :set_model, only: [:show, :update, :destroy]
 
   def index
-    render json: Model.where(make_id: params[:id])
+    render json: Model.where(make_id: params[:make_id])
   end
 
   def create
-    make = Make.find(params[:id])
+    make = Make.find(params[:make_id])
     model = make.models.new(model_params)
 
     if model.save!
