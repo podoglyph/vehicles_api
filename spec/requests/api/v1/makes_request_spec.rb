@@ -39,7 +39,7 @@ describe "Makes API" do
   end
 
   it "can create a new make" do
-    make_params = {name: "Tesla"}
+    make_params = {name: "Tesla", country: "America"}
 
     post "/api/v1/makes", params: {make: make_params}
 

@@ -5,13 +5,13 @@ describe "Make Models API" do
   it "sends a list of all models with a given make" do
     make = create(:make)
     id = make.id
-    make.models.create(name: "Helen")
-    make.models.create(name: "Achilles")
+    make.models.create(name: "Helen", year: "2018", color: "Yellow")
+    make.models.create(name: "Achilles", year: "2016", color: "Blue")
 
     get "/api/v1/makes/#{id}/models"
 
     json = JSON.parse(response.body)
-    
+
     expect(response).to be_success
     expect(json.length).to eq(2)
 
@@ -26,7 +26,7 @@ describe "Make Models API" do
   it "can create a model for a given make" do
     make = create(:make)
     id = make.id
-    model_params = {name: "Zeus"}
+    model_params = {name: "Zeus", year: "2005", color: "Green"}
 
     post "/api/v1/makes/#{id}/models", params: {model: model_params}
 
@@ -40,7 +40,7 @@ describe "Make Models API" do
   it "can update a model for a given make" do
     make = create(:make)
     make_id = make.id
-    model = make.models.create(name: "Pinto")
+    model = make.models.create(name: "Pinto", year: "2018", color: "Yellow")
     model_id = model.id
     model_name = model.name
 
@@ -56,8 +56,8 @@ describe "Make Models API" do
   it "can delete a model from a given make" do
     make = create(:make)
     make_id = make.id
-    model_one = make.models.create(name: "Pinto Bean")
-    model_two = make.models.create(name: "Jelly Bean")
+    model_one = make.models.create(name: "Pinto Bean", year: "2017", color: "Green")
+    model_two = make.models.create(name: "Jelly Bean", year: "2014", color: "Black")
 
     expect(Model.count).to eq(2)
 
