@@ -5,7 +5,10 @@ Rails.application.routes.draw do
       resources :makes, except: [:new] do
         resources :models
       end
+
+      resources :options, except: [:new]
+
     end
   end
-  
+
 end
