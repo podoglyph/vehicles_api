@@ -41,7 +41,7 @@ class Api::V1::OptionsController < ApplicationController
   private
 
     def option_params
-      params.require(:option).permit(:id, :name)
+      params.require(:option).permit(:id, :name, :cost)
     end
 
     def set_option
