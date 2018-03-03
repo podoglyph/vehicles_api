@@ -43,7 +43,7 @@ class Api::V1::MakesController < ApplicationController
   private
 
     def make_params
-      params.require(:make).permit(:id, :name)
+      params.require(:make).permit(:id, :name, :country)
     end
 
     def set_make

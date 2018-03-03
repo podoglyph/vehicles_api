@@ -39,7 +39,7 @@ describe "Options API" do
   end
 
   it "can create a new option" do
-    option_params = {name: "Leather seats"}
+    option_params = {name: "Leather seats", cost: 149}
 
     post "/api/v1/options", params: {option: option_params}
 
