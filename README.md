@@ -32,6 +32,15 @@ This app is built with:
 | PUT `/api/v1/makes/:id/models/:id` | Update existing model |
 | DELETE `/api/v1/makes/:id/models/:id` | Delete existing model |
 
+### Options
+
+| Resources | Detail |
+| :-------- |:-------|
+| GET `/api/v1/options` | Index all options |
+| POST `/api/v1/options/?option[name]=name` | Create a new option |
+| PUT `/api/v1/options/:id/?option[name]=name` | Update existing option |
+| DELETE `/api/v1/options/:id` | Delete existing option |
+
 ## License
 
 This project is licensed under the MIT License.

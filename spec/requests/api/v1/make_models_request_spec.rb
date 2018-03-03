@@ -11,7 +11,7 @@ describe "Make Models API" do
     get "/api/v1/makes/#{id}/models"
 
     json = JSON.parse(response.body)
-
+    
     expect(response).to be_success
     expect(json.length).to eq(2)
 
