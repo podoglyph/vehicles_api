@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180305021051) do
+ActiveRecord::Schema.define(version: 20180305182929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20180305021051) do
     t.index ["vehicle_id"], name: "index_options_on_vehicle_id"
   end
 
+  create_table "vehicle_options", force: :cascade do |t|
+    t.bigint "option_id"
+    t.bigint "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_vehicle_options_on_option_id"
+    t.index ["vehicle_id"], name: "index_vehicle_options_on_vehicle_id"
+  end
+
   create_table "vehicles", force: :cascade do |t|
     t.string "nickname"
     t.string "mileage"
@@ -60,5 +69,7 @@ ActiveRecord::Schema.define(version: 20180305021051) do
   add_foreign_key "models", "makes"
   add_foreign_key "options", "models"
   add_foreign_key "options", "vehicles"
+  add_foreign_key "vehicle_options", "options"
+  add_foreign_key "vehicle_options", "vehicles"
   add_foreign_key "vehicles", "models"
 end
