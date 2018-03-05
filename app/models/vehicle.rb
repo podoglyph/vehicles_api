@@ -2,7 +2,8 @@ class Vehicle < ApplicationRecord
   validates_presence_of :nickname, :model_id
 
   belongs_to :model
-  has_many :options
+  has_many :vehicle_options
+  has_many :options, through: :vehicle_options
 
   enum condition: [:fair, :good, :very_good, :excellent]
 
@@ -19,6 +20,10 @@ class Vehicle < ApplicationRecord
     models.map do |m|
       m.vehicles
     end
+  end
+
+  def self.option(option)
+    Vehicle.joins(:options).where(options: { name: option })
   end
 
 end

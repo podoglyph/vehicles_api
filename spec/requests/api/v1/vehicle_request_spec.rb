@@ -155,6 +155,31 @@ describe "Vehicles API" do
       expect(json.last[0]["id"]).to eq(v5.id)
       expect(json.last[0]["nickname"]).to eq(v5.nickname)
     end
+
+    it "sends a list of vehicles by selected option" do
+      options = create_list(:option, 10)
+      option1 = options.first
+      option2 = options[1]
+
+      vehicles = create_list(:vehicle, 5)
+
+      vehicles[0].options << option1
+      vehicles[1].options << option1
+      vehicles[2].options << option2
+      vehicles[3].options << option2
+
+      get "/api/v1/vehicles/option?option=#{option1.name}"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(2)
+
+      expect(json.first["id"]).to eq(vehicles[0].id)
+      expect(json.first["nickname"]).to eq(vehicles[0].nickname)
+      expect(json.last["id"]).to eq(vehicles[1].id)
+      expect(json.last["nickname"]).to eq(vehicles[1].nickname)
+    end
+
   end
 
 

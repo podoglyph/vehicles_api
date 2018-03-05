@@ -11,8 +11,8 @@ describe Option, type: :model do
   end
 
   describe "ActiveRecord associations" do
-    it { should belong_to(:model) }
-    it { should belong_to(:vehicle) }
+    it { should have_many(:vehicle_options) }
+    it { should have_many(:vehicles).through(:vehicle_options) }
   end
 
 end
