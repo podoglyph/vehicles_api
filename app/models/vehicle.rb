@@ -14,4 +14,11 @@ class Vehicle < ApplicationRecord
     Vehicle.order("mileage ASC").limit(3)
   end
 
+  def self.color(color)
+    models = Model.where(color: color.downcase)
+    models.map do |m|
+      m.vehicles
+    end
+  end
+
 end

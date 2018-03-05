@@ -131,6 +131,31 @@ describe "Vehicles API" do
       expect(json.last["nickname"]).to eq(v3.nickname)
     end
 
+    it "sends a list of vehicles by selected color" do
+      m1 = create(:model, color: "green")
+      m2 = create(:model, color: "blue")
+      m3 = create(:model, color: "purple")
+      m4 = create(:model, color: "yellow")
+      m5 = create(:model, color: "green")
+
+      v1 = m1.vehicles.create(nickname: "Patsy")
+      v2 = m2.vehicles.create(nickname: "Bob")
+      v3 = m3.vehicles.create(nickname: "Alice")
+      v4 = m4.vehicles.create(nickname: "Stark")
+      v5 = m5.vehicles.create(nickname: "Luba")
+
+      get "/api/v1/vehicles/color?color=green"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(2)
+
+      expect(json.first[0]["id"]).to eq(v1.id)
+      expect(json.first[0]["nickname"]).to eq(v1.nickname)
+      expect(json.last[0]["id"]).to eq(v5.id)
+      expect(json.last[0]["nickname"]).to eq(v5.nickname)
+    end
+
   end
 
 

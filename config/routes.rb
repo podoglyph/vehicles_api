@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       namespace :vehicles do
          get "/most_expensive", to: "most_expensive#index"
          get "/least_mileage", to: "least_mileage#index"
+         get "/color", to: "color#index"
       end
 
       resources :makes, except: [:new] do
