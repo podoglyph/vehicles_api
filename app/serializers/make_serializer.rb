@@ -1,3 +1,3 @@
 class MakeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :country, :created_at
+  attributes :id, :name, :country
 end
