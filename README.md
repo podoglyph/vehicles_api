@@ -45,8 +45,8 @@ This app is built with:
 
 | Resources | Detail |
 | :-------- |:-------|
-| GET `/api/v1/vehicles` | Index all options |
-| DELETE `/api/v1/vehicles/:id` | Delete existing option |
+| GET `/api/v1/vehicles` | Index all vehicles |
+| DELETE `/api/v1/vehicles/:id` | Delete existing vehicle |
 
 ## License
 
