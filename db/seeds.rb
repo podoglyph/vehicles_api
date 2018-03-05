@@ -20,7 +20,7 @@ manufacturers.each do |m|
   make = Make.create!(name: m[0], country: m[1])
   csv.each do |row|
     if row["make"] == make.name
-      make.models.create!(name: row["name"], year: row["year"], color: row["color"], base_price: row["base_price"], style: row["type"])
+      make.models.create!(name: row["name"], year: row["year"], color: row["color"], base_price: row["base_price"], style: row["style"])
     end
   end
 end
