@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303225132) do
+ActiveRecord::Schema.define(version: 20180305021051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20180303225132) do
     t.bigint "make_id"
     t.string "year"
     t.string "color"
+    t.bigint "base_price"
+    t.string "style"
     t.index ["make_id"], name: "index_models_on_make_id"
   end
 
@@ -37,22 +39,26 @@ ActiveRecord::Schema.define(version: 20180303225132) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "cost"
+    t.bigint "vehicle_id"
+    t.bigint "model_id"
+    t.index ["model_id"], name: "index_options_on_model_id"
+    t.index ["vehicle_id"], name: "index_options_on_vehicle_id"
   end
 
   create_table "vehicles", force: :cascade do |t|
-    t.bigint "make_id"
+    t.string "nickname"
+    t.string "mileage"
+    t.integer "condition", default: 0
+    t.boolean "pre_owned", default: false
+    t.bigint "price"
     t.bigint "model_id"
-    t.bigint "option_id"
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["make_id"], name: "index_vehicles_on_make_id"
     t.index ["model_id"], name: "index_vehicles_on_model_id"
-    t.index ["option_id"], name: "index_vehicles_on_option_id"
   end
 
   add_foreign_key "models", "makes"
-  add_foreign_key "vehicles", "makes"
+  add_foreign_key "options", "models"
+  add_foreign_key "options", "vehicles"
   add_foreign_key "vehicles", "models"
-  add_foreign_key "vehicles", "options"
 end

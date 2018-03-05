@@ -38,7 +38,7 @@ class Api::V1::ModelsController < ApplicationController
   private
 
   def model_params
-    params.require(:model).permit(:id, :name, :year, :color)
+    params.require(:model).permit(:id, :name, :year, :color, :style, :base_price)
   end
 
   def set_model

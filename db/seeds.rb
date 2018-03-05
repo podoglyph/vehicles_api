@@ -1,8 +1,40 @@
-5.times do
-  make = Make.create(name: Faker::Vehicle.unique.manufacture, country: Faker::HitchhikersGuideToTheGalaxy.planet )
-  make.models.create(name: Faker::StarWars.unique.vehicle, year: "2017", color: "Purple")
+require 'csv'
+
+csv_text = File.read('db/vehicles.csv')
+csv = CSV.parse(csv_text, :headers => true)
+
+manufacturers = {
+  Ford: "America",
+  Chevrolet: "America",
+  Subaru: "Japan",
+  Honda: "Japan",
+  Toyota: "Japan",
+  Mercedes: "Germany",
+  BMW: "Germany",
+  Volkswagen: "Germany",
+  Audi: "Germany",
+  Tesla: "America"
+}
+
+manufacturers.each do |m|
+  make = Make.create!(name: m[0], country: m[1])
+  csv.each do |row|
+    if row["make"] == make.name
+      make.models.create!(name: row["name"], year: row["year"], color: row["color"], base_price: row["base_price"], style: row["style"])
+    end
+  end
 end
 
-10.times do
-  Option.create(name: Faker::StarWars.unique.droid, cost: Faker::Number.number(5))
+options = ["AM/FM Stereo", "Bluetooth Wireless", "Premium Sound", "OnStar", "Air Conditioning", "Power Windows", "Power Door Locks", "Power Seats", "Leather", "Backup Camera", "Dual Air Bags", "Heated Seats", "Heated Mirrors", "Premium Wheels", "Privacy Glass"]
+
+options.each do |o|
+  Option.create!(name: o, cost: Faker::Number.number(3).to_i)
+end
+
+models = Model.all
+
+models.each do |m|
+  3.times do |v|
+    m.vehicles.create!(nickname: Faker::DrWho.character, mileage: Faker::Number.number(5).to_i)
+  end
 end

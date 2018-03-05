@@ -7,7 +7,7 @@ Rails.application.routes.draw do
       end
 
       resources :options, except: [:new]
-
+      resources :vehicles, except: [:new]
     end
   end
 
