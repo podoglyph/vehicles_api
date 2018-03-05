@@ -41,4 +41,32 @@ describe "Vehicles API" do
     expect(vehicle.model_id).to eq(vehicle_params[:model_id])
   end
 
+  it "can update an existing vehicle" do
+    vehicle = create(:vehicle, model_id: @model.id)
+    id = vehicle.id
+    vehicle_name = vehicle.nickname
+
+    put "/api/v1/vehicles/#{id}", params: {vehicle: {id: id, nickname: "Patty"}}
+
+    new_vehicle = Vehicle.find(id)
+
+    assert_response :success
+    expect(response).to be_success
+    expect(new_vehicle.nickname).to eq("Patty")
+  end
+
+  it "can delete an existing vehicle" do
+    vehicles = create_list(:vehicle, 5, model_id: @model.id)
+
+    expect(Vehicle.count).to eq(5)
+
+    vehicle_one_id = vehicles.first.id
+
+    delete "/api/v1/vehicles/#{vehicle_one_id}"
+
+    assert_response :success
+    expect(response).to be_success
+    expect(Vehicle.count).to eq(4)
+  end
+
 end
