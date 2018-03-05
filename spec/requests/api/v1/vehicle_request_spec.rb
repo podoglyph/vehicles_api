@@ -73,9 +73,11 @@ describe "Vehicles API" do
   end
 
   context "when performing custom API queries" do
+
     makes = %w(Ford Chevrolet Tesla BMW Mercedes Honda Toyota Subaru Volkwagen Audi Jeep)
 
     years = %w(1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018)
+
 
     before(:all) do
       makes.each do |m|
@@ -95,6 +97,27 @@ describe "Vehicles API" do
       v5 = create(:vehicle, price: 9998)
 
       get "/api/v1/vehicles/most_expensive"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(3)
+
+      expect(json.first["id"]).to eq(v1.id)
+      expect(json.first["nickname"]).to eq(v1.nickname)
+      expect(json[1]["id"]).to eq(v2.id)
+      expect(json[1]["nickname"]).to eq(v2.nickname)
+      expect(json.last["id"]).to eq(v3.id)
+      expect(json.last["nickname"]).to eq(v3.nickname)
+    end
+
+    it "sends a list of 3 vehicles with lowest mileage" do
+      v1 = create(:vehicle, mileage: 1)
+      v2 = create(:vehicle, mileage: 2)
+      v3 = create(:vehicle, mileage: 3)
+      v4 = create(:vehicle, mileage: 555)
+      v5 = create(:vehicle, mileage: 5555)
+
+      get "/api/v1/vehicles/least_mileage"
 
       json = JSON.parse(response.body)
 

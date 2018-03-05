@@ -55,6 +55,7 @@ This app is built with:
 | Resources | Detail |
 | :-------- |:-------|
 | GET /api/v1/vehicles/most_expensive | Index 3 most expensive vehicles |
+| GET /api/v1/vehicles/least_mileage | Index 3 vehicles with lowest mileage |
 
 
 

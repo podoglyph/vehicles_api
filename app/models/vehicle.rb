@@ -10,4 +10,8 @@ class Vehicle < ApplicationRecord
     Vehicle.order("price DESC").limit(3)
   end
 
+  def self.least_mileage
+    Vehicle.order("mileage ASC").limit(3)
+  end
+
 end
