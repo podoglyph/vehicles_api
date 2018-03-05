@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Vehicles API" do
 
-  context "when performing CRUD functions" do
+  context "when performing standard CRUD functions" do
 
     before(:each) do
       @make = create(:make)
