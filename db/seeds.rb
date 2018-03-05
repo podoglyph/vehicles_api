@@ -38,3 +38,10 @@ models.each do |m|
     m.vehicles.create!(nickname: Faker::DrWho.character, mileage: Faker::Number.number(5).to_i)
   end
 end
+
+vehicles = Vehicle.all
+options = Option.all
+
+vehicles.each do |v|
+  v.options << options.sample(2)
+end
