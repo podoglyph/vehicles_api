@@ -5,12 +5,12 @@ describe "Vehicles API" do
   context "when performing standard CRUD functions" do
 
     before(:each) do
-      @make = create(:make)
+      @make = create(:make, name: "Tesla")
       @model = @make.models.create(name: "Star Dust", year: "2018", color: "Blue", style: "sedan", base_price: 29999)
     end
 
     it "sends a list of all vehicles" do
-      vehicles = create_list(:vehicle, 10, model_id: @model.id)
+      vehicles = create_list(:vehicle, 10)
 
       get "/api/v1/vehicles"
 
@@ -58,9 +58,9 @@ describe "Vehicles API" do
     end
 
     it "can delete an existing vehicle" do
-      vehicles = create_list(:vehicle, 5, model_id: @model.id)
+      vehicles = create_list(:vehicle, 3, model_id: @model.id)
 
-      expect(Vehicle.count).to eq(5)
+      expect(Vehicle.count).to eq(3)
 
       vehicle_one_id = vehicles.first.id
 
@@ -68,27 +68,94 @@ describe "Vehicles API" do
 
       assert_response :success
       expect(response).to be_success
-      expect(Vehicle.count).to eq(4)
+      expect(Vehicle.count).to eq(2)
     end
   end
 
-  # context "when performing custom API queries" do
-  #
-  #   before(:all) do
-  #     @makes = create_list(:make, 5)
-  #
-  #     makes.each do |m, i|
-  #       @model[i] = Model.create(make_id: m.id)
-  #       @model[i].vehicles.create!(nickname: Faker::DrWho.character, mileage: Faker::Number.number(5).to_i, condition: i)
-  #     end
-  #   end
-  #
-  #   it "sends a list of most expensive vehicles" do
-  #     binding.pry
-  #     expect(2).to eq(2)
-  #   end
-  #
-  # end
+  context "when performing custom API queries" do
+
+    makes = %w(Ford Chevrolet Tesla BMW Mercedes Honda Toyota Subaru Volkwagen Audi Jeep)
+
+    years = %w(1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018)
+
+
+    before(:all) do
+      makes.each do |m|
+        make = create(:make, name: m)
+        3.times do |i|
+          model = create(:model, make_id: make.id)
+        end
+      end
+
+    end
+
+    it "sends a list of 3 most expensive vehicles" do
+      v1 = create(:vehicle, price: 999999)
+      v2 = create(:vehicle, price: 999998)
+      v3 = create(:vehicle, price: 999997)
+      v4 = create(:vehicle, price: 9999)
+      v5 = create(:vehicle, price: 9998)
+
+      get "/api/v1/vehicles/most_expensive"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(3)
+
+      expect(json.first["id"]).to eq(v1.id)
+      expect(json.first["nickname"]).to eq(v1.nickname)
+      expect(json[1]["id"]).to eq(v2.id)
+      expect(json[1]["nickname"]).to eq(v2.nickname)
+      expect(json.last["id"]).to eq(v3.id)
+      expect(json.last["nickname"]).to eq(v3.nickname)
+    end
+
+    it "sends a list of 3 vehicles with lowest mileage" do
+      v1 = create(:vehicle, mileage: 1)
+      v2 = create(:vehicle, mileage: 2)
+      v3 = create(:vehicle, mileage: 3)
+      v4 = create(:vehicle, mileage: 555)
+      v5 = create(:vehicle, mileage: 5555)
+
+      get "/api/v1/vehicles/least_mileage"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(3)
+
+      expect(json.first["id"]).to eq(v1.id)
+      expect(json.first["nickname"]).to eq(v1.nickname)
+      expect(json[1]["id"]).to eq(v2.id)
+      expect(json[1]["nickname"]).to eq(v2.nickname)
+      expect(json.last["id"]).to eq(v3.id)
+      expect(json.last["nickname"]).to eq(v3.nickname)
+    end
+
+    it "sends a list of vehicles by selected color" do
+      m1 = create(:model, color: "green")
+      m2 = create(:model, color: "blue")
+      m3 = create(:model, color: "purple")
+      m4 = create(:model, color: "yellow")
+      m5 = create(:model, color: "green")
+
+      v1 = m1.vehicles.create(nickname: "Patsy")
+      v2 = m2.vehicles.create(nickname: "Bob")
+      v3 = m3.vehicles.create(nickname: "Alice")
+      v4 = m4.vehicles.create(nickname: "Stark")
+      v5 = m5.vehicles.create(nickname: "Luba")
+
+      get "/api/v1/vehicles/color?color=green"
+
+      json = JSON.parse(response.body)
+
+      expect(json.length).to eq(2)
+
+      expect(json.first[0]["id"]).to eq(v1.id)
+      expect(json.first[0]["nickname"]).to eq(v1.nickname)
+      expect(json.last[0]["id"]).to eq(v5.id)
+      expect(json.last[0]["nickname"]).to eq(v5.nickname)
+    end
+  end
 
 
 end

@@ -46,7 +46,19 @@ This app is built with:
 | Resources | Detail |
 | :-------- |:-------|
 | GET `/api/v1/vehicles` | Index all vehicles |
+| GET `/api/v1/vehicles/:id` | Show single vehicle |
+| PUT `/api/v1/vehicles/:id?vehicle[name]=name` | Update existing vehicle |
 | DELETE `/api/v1/vehicles/:id` | Delete existing vehicle |
+
+#### Vehicle Custom Queries
+
+| Resources | Detail |
+| :-------- |:-------|
+| GET /api/v1/vehicles/most_expensive | Index 3 most expensive vehicles |
+| GET /api/v1/vehicles/least_mileage | Index 3 vehicles with lowest mileage |
+| GET /api/v1/vehicles/color?color=color | Index vehicles with selected color |
+
+
 
 ## License
 

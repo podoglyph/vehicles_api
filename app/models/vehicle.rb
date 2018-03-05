@@ -5,4 +5,20 @@ class Vehicle < ApplicationRecord
   has_many :options
 
   enum condition: [:fair, :good, :very_good, :excellent]
+
+  def self.most_expensive
+    Vehicle.order("price DESC").limit(3)
+  end
+
+  def self.least_mileage
+    Vehicle.order("mileage ASC").limit(3)
+  end
+
+  def self.color(color)
+    models = Model.where(color: color.downcase)
+    models.map do |m|
+      m.vehicles
+    end
+  end
+
 end
