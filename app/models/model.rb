@@ -1,5 +1,5 @@
 class Model < ApplicationRecord
-  validates :name, :year, :color, presence: true
+  validates :name, :year, :color, :make_id, :style, :base_price, presence: true
 
   belongs_to :make
   has_many :options

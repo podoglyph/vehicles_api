@@ -2,11 +2,16 @@ require 'rails_helper'
 
 describe "Make Models API" do
 
+  before(:each) do
+    @make = create(:make)
+    @model = @make.models.create(name: "Star Dust", year: "2018", color: "Blue", style: "sedan", base_price: 29999)
+  end
+
   it "sends a list of all models with a given make" do
     make = create(:make)
     id = make.id
-    make.models.create(name: "Helen", year: "2018", color: "Yellow")
-    make.models.create(name: "Achilles", year: "2016", color: "Blue")
+    make.models.create(name: "Helen", year: "2018", color: "Yellow", style: "sedan", base_price: 29999)
+    make.models.create(name: "Achilles", year: "2016", color: "Blue", style: "sedan", base_price: 26999)
 
     get "/api/v1/makes/#{id}/models"
 
@@ -26,7 +31,7 @@ describe "Make Models API" do
   it "can create a model for a given make" do
     make = create(:make)
     id = make.id
-    model_params = {name: "Zeus", year: "2005", color: "Green"}
+    model_params = {name: "Zeus", year: "2005", color: "Green", style: "sedan", base_price: 19999}
 
     post "/api/v1/makes/#{id}/models", params: {model: model_params}
 
@@ -38,11 +43,9 @@ describe "Make Models API" do
   end
 
   it "can update a model for a given make" do
-    make = create(:make)
-    make_id = make.id
-    model = make.models.create(name: "Pinto", year: "2018", color: "Yellow")
-    model_id = model.id
-    model_name = model.name
+    make_id = @make.id
+    model_id = @model.id
+    model_name = @model.name
 
     put "/api/v1/makes/#{make_id}/models/#{model_id}", params: {model: {id: model_id, name: "Jelly Bean"}}
 
@@ -54,10 +57,9 @@ describe "Make Models API" do
   end
 
   it "can delete a model from a given make" do
-    make = create(:make)
-    make_id = make.id
-    model_one = make.models.create(name: "Pinto Bean", year: "2017", color: "Green")
-    model_two = make.models.create(name: "Jelly Bean", year: "2014", color: "Black")
+    make_id = @make.id
+    model_one = @model
+    model_two = @make.models.create(name: "Stardust", year: "2016", color: "Purple", style: "sedan", base_price: 29999)
 
     expect(Model.count).to eq(2)
 

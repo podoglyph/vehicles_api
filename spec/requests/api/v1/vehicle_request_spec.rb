@@ -4,7 +4,7 @@ describe "Vehicles API" do
 
   before(:each) do
     @make = create(:make)
-    @model = @make.models.create(name: "Star Dust", year: "2018", color: "Blue")
+    @model = @make.models.create(name: "Star Dust", year: "2018", color: "Blue", style: "sedan", base_price: 29999)
   end
 
   it "sends a list of all vehicles" do
