@@ -155,7 +155,6 @@ describe "Vehicles API" do
       expect(json.last[0]["id"]).to eq(v5.id)
       expect(json.last[0]["nickname"]).to eq(v5.nickname)
     end
-
   end
 
 
