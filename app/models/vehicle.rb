@@ -5,4 +5,9 @@ class Vehicle < ApplicationRecord
   has_many :options
 
   enum condition: [:fair, :good, :very_good, :excellent]
+
+  def self.most_expensive
+    Vehicle.order("price DESC").limit(3)
+  end
+
 end

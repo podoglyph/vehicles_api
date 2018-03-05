@@ -8,12 +8,11 @@ describe "Make Models API" do
   end
 
   context "when performing standard CRUD functions" do
-    
+
     it "sends a list of all models with a given make" do
-      make = create(:make)
-      id = make.id
-      make.models.create(name: "Helen", year: "2018", color: "Yellow", style: "sedan", base_price: 29999)
-      make.models.create(name: "Achilles", year: "2016", color: "Blue", style: "sedan", base_price: 26999)
+      id = @make.id
+
+      @make.models.create(name: "Achilles", year: "2016", color: "Blue", style: "sedan", base_price: 26999)
 
       get "/api/v1/makes/#{id}/models"
 
@@ -22,7 +21,7 @@ describe "Make Models API" do
       expect(response).to be_success
       expect(json.length).to eq(2)
 
-      expect(json.first["name"]).to eq("Helen")
+      expect(json.first["name"]).to eq(@model.name)
       expect(json.first["make_id"]).to eq(id)
 
       expect(json.last["name"]).to eq("Achilles")
