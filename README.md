@@ -10,6 +10,14 @@ This app is built with:
 * `Ruby 2.4.1`
 * `PostgreSQL 10.2`
 
+To run:
+
+1. Clone this repo and `cd vehicles_api`
+3. `rails db:create`
+4. `rails db:migrate`
+5. `rails db:seed`
+5.  Visit `localhost:3000` or use a HTTP client such as Postman to interact with the API using the docs below.
+
 ## API Documentation:
 
 ### Makes
